@@ -20,13 +20,28 @@ class Main:
                 if data == '':
                     notdone = False
                     break
-
+                # Breaks apart each line
                 if data[0] == '[':
                     k = data.index(']')
 
                     time = data[1: k]
                     list_time = time.split(', ')
-                    print(list_time)
+                    # print(list_time)
+
+                if ': ' in data:
+                    j = data.index(': ')
+                    name = data[k + 2: j].strip()
+
+                elif 'encryption' in data:
+                    name = 'Chat Encrypted!'
+                    message = 'Chat Encrypted!'
+
+                else:
+                    name = 'Chat Created!'
+                    message = 'Chat Created!'
+
+                print(name)
+
 
 
 

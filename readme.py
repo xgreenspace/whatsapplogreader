@@ -1,14 +1,16 @@
 import numpy as np
 import matplotlib.pyplot as plt
 import datetime as date
+import nltk
+import re
 
 
-
-def readtextfile(filename):
+def read_format_file(filename):
     """
     Reads the chat file and breaks each message into three components:
     Time, User, Message
     """
+
     with open(filename, 'r') as file:
 
         notdone = True
@@ -28,24 +30,19 @@ def readtextfile(filename):
                 list_time = time.split(', ')
                 # print(list_time)
 
-            if ': ' in data:
-                j = data.index(': ')
-                name = data[k + 2: j].strip()
+                if 'Messages to this group are now secured with end-to-end encryption' in data:
+                    name = 'Chat Encrypted!'
+                    message = 'Chat Encrypted!'
 
-            elif 'encryption' in data:
-                name = 'Chat Encrypted!'
-                message = 'Chat Encrypted!'
+                elif ': ' in data:
+                    j = data.index(': ')
+                    name = data[k + 2: j].strip()
 
-            else:
-                name = 'Chat Created!'
-                message = 'Chat Created!'
+                elif 'created group' in data and not ': ' in data:
+                    name = 'Chat Created!'
+                    message = 'Chat Created!'
 
-            print(name)
-
-
+                print(name)
 
 
-
-
-
-readtextfile('_chat.txt')
+read_format_file('_chat.txt')

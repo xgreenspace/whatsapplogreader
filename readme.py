@@ -33,6 +33,7 @@ def read_format_file_no_re(filename):
                 time = data[1: k]
                 list_time = time.split(', ')
 
+                # Identifies encryption line
                 if 'Messages to this group are now secured with end-to-end encryption' in data:
                     name = 'Chat Encrypted!'
                     message = 'Chat Encrypted!'
@@ -41,7 +42,7 @@ def read_format_file_no_re(filename):
                     j = data.index(': ')
                     name = data[k + 2: j].strip()
                     message = data[j + 1:].strip()
-
+                # Identifies group creation line
                 elif 'created group' in data and not ': ' in data:
                     name = 'Chat Created!'
                     message = 'Chat Created!'
@@ -50,8 +51,8 @@ def read_format_file_no_re(filename):
                 list_name.append(name)
                 list_message.append(message)
 
-        print(master_list_time)
-        print(list_name)
-        print(list_message)
+        print(len(master_list_time))
+        print(len(list_name))
+        print(len(list_message))
 
 read_format_file_no_re('_chat.txt')

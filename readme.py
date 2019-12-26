@@ -53,22 +53,32 @@ def read_format_file_no_re(filename):
                 list_name.append(name)
                 list_message.append(message)
 
+            # Manges multi-lined messages
             else:
                 last_line = ''
 
                 while not data[0] == '[':
+
                     data = file.readline()
-                    message = data[:].strip()
+
+                    if data[0] == '[':
+
+                        break
+
+                    message = data.strip()
                     message = last_line + '\n' + message
                     last_line = message
-                    
-                    # FIXME: Still errors with multi-lined messages
 
-            print(message)
-            print(time)
+                list_message[-1] += message
 
-        # print((master_list_time))
-        # print((list_name))
-        # print((list_message))
+                # FIXME: Still bug that deletes message after a multiline message
+
+            # print(message)
+            # print(time)
+
+        print(len(master_list_time))
+        print(len(list_name))
+        print(len(list_message))
+
 
 read_format_file_no_re('_chat.txt')

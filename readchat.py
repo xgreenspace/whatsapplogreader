@@ -1,8 +1,3 @@
-import numpy as np
-import matplotlib.pyplot as plt
-import datetime as date
-import nltk
-import re
 
 
 def read_format_file_no_re(filename):
